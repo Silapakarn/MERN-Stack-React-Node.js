@@ -1,0 +1,37 @@
+.navbar{
+    background-color: rgb(68, 182, 235);
+    height: 50px;
+    color: rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 2rem;
+    padding-left: 2rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    /* border: 1px solid rgb(33, 139, 0); */
+}
+
+.logo{
+    font-size: 20px;
+    font-weight: bold;
+}
+  
+.list{
+    display: flex;
+    align-items: center;
+    list-style: none;
+}
+
+.listItem{
+    margin-right: 20px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+
+.avatar{
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+}
