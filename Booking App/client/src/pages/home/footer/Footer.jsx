@@ -47,7 +47,7 @@ export default function Footer() {
         </ul>
         
         </div>
-        <div className="fText">Copyright © 2022 Dragonbooking.</div>
+        {/* <div className="fText">Copyright © 2022 Dragonbooking.</div> */}
     </div>
   )
 }
