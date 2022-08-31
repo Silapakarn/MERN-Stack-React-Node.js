@@ -1,11 +1,18 @@
 import React from 'react'
+import useFetch from '../../../hook/useFetch.js'
 import '../components/featured.css'
 
 export default function Featured() {
+
+  //Get data from api
+  const{data,loading,error} = useFetch("http://localhost:8800/api/hotels/countByCity?cities=berlin,KK,bangkok")
+  console.log(data)
+
   return (
   
     <div className="featured">
 
+      {loading ? ("Loading please wait" ):( <>
         {/*--------- 1 --------- */}
         <div className="featuredItem">
             <img
@@ -14,8 +21,8 @@ export default function Featured() {
             className="featuredImg"
             />
             <div className="featuredTitles">
-            <h1>Dublin</h1>
-            <h2>123 properties</h2>
+            <h1>Berlin</h1>
+            <h2>{data[0]} properties</h2>
             </div>
         </div>
         
@@ -27,8 +34,8 @@ export default function Featured() {
             className="featuredImg"
             />
             <div className="featuredTitles">
-            <h1>Reno</h1>
-            <h2>533 properties</h2>
+            <h1>KK</h1>
+            <h2>{data[1]} properties</h2>
             </div>
         </div>
 
@@ -40,11 +47,12 @@ export default function Featured() {
             className="featuredImg"
             />
             <div className="featuredTitles">
-            <h1>Austin</h1>
-            <h2>532 properties</h2>
+            <h1>Bangkok</h1>
+            <h2>{data[2]} properties</h2>
             </div>
         </div>
-
+        
+        </>)}
     </div>
   )
 }
