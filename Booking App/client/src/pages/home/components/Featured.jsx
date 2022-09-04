@@ -6,7 +6,7 @@ export default function Featured() {
 
   //Get data from api
   const{data,loading,error} = useFetch("http://localhost:8800/api/hotels/countByCity?cities=berlin,KK,bangkok")
-  console.log(data)
+  // console.log(data)
 
   return (
   
@@ -34,7 +34,7 @@ export default function Featured() {
             className="featuredImg"
             />
             <div className="featuredTitles">
-            <h1>KK</h1>
+            <h1>London</h1>
             <h2>{data[1]} properties</h2>
             </div>
         </div>

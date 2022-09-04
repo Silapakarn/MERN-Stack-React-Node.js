@@ -10,13 +10,21 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import MailList from '../pages/home/mailList/MailList.jsx'
 import Footer from '../pages/home/footer/Footer.jsx'
-import { useState } from "react";
+import { useState, useContext } from "react";
 import useFetch from '../hook/useFetch.js'
 import {useLocation} from 'react-router-dom'
+import {SearchContext } from "../context/SearchContext.js";
+import {AuthContext} from "../context/AuthContext.js";
+import { useNavigate } from 'react-router-dom';
+import Reserve from '../pages/home/reserve/Reserve.jsx'
+
 
 
 
 export default function Hotel() {
+
+
+
 
   //location
   const location = useLocation()
@@ -24,10 +32,33 @@ export default function Hotel() {
 
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+
+
 
   //Get API
   const {data, loading, error} = useFetch(`http://localhost:8800/api/hotels/find/${id}`)
   console.log(data)
+
+  //user
+  const { user } = useContext(AuthContext)
+  const navigate = useNavigate()
+
+
+  //useContext
+  const { dates, options } = useContext(SearchContext)
+  console.log(dates)
+
+  const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
+  function dayDifference(date1, date2) {
+    const timeDiff = Math.abs(date2.getTime() - date1.getTime())
+    const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY)
+    return diffDays;
+  }
+
+  //days
+  const days = dayDifference(dates[0].endDate, dates[0].startDate)
+
 
   const photos = [
     {
@@ -66,7 +97,17 @@ export default function Hotel() {
     }
 
     setSlideNumber(newSlideNumber)
-  };
+  }
+
+
+  //handleClick
+  const handleClick = () => {
+    if(user){
+      setOpenModal(true)
+    }else{
+      navigate("/login")
+    }
+  }
 
   return (
     <div>
@@ -138,15 +179,19 @@ export default function Hotel() {
               </p>
             </div>
             <div className="hotelDetailsPrice">
-              <h1>Perfect for a 9-night stay!</h1>
+              <h1>Perfect for a {days}-night stay!</h1>
               <span>
                 Located in the real heart of Krakow, this property has an
                 excellent location score of 9.8!
               </span>
               <h2>
-                <b>$945</b> (9 nights)
+                <b>${days * data.cheapestPrice * options.room}</b> ({days} nights)
               </h2>
-              <button>Reserve or Book Now!</button>
+
+
+              <button >Reserve or Book Now!</button>
+
+
             </div>
           </div>
         </div>
@@ -155,6 +200,8 @@ export default function Hotel() {
         <Footer />
       </div>
       )}
+
+        {openModal && <Reserve setOpen={setOpenModal} hotelId={id}/>}
     </div>
   )
 }
