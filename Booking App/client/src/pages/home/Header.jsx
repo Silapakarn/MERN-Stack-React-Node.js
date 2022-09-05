@@ -219,7 +219,6 @@ const Header = ({ type }) => {
             </div>
           </>
         )}
-        
       </div>
     </div>
   )
