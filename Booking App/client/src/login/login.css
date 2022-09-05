@@ -34,8 +34,9 @@
 }
 
 .form_container h1 {
-	font-size: 40px;
+	font-size: 30px;
 	margin-top: 0;
+	color: #003580;
 }
 
 .input {

@@ -51,10 +51,10 @@ export default function Singup() {
     <div className="signup_container">
       <div className="signup_form_container">
         <div className="left">
-          <h2>Welcome me Back</h2>
+          <h3>Welcome to Dragon Booking</h3>
           <Link to='/login'>
-            <button type="button" className="white_btn">
-              Sign in
+            <button type="button" className="white_btn_1">
+              Log In
             </button>
           </Link>
         </div>
@@ -71,6 +71,7 @@ export default function Singup() {
               value={data.firstName}
 							required
 							className='input'
+            
 						/>
 						<input
 							type="text"

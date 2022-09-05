@@ -91,6 +91,7 @@ const Header = ({ type }) => {
             <FontAwesomeIcon icon={faTaxi} />
             <span>Airport taxis</span>
           </div>
+
         </div>
         {type !== "list" && (
           <>
@@ -103,8 +104,7 @@ const Header = ({ type }) => {
             </p>
 
 
-            {/* {!user && <button className="button-38">Sign in / Register</button>} */}
-
+     
 
             <div className="headerSearch">
               <div className="headerSearchItem">
@@ -136,6 +136,7 @@ const Header = ({ type }) => {
                   />
                 )}
               </div>
+
               <div className="headerSearchItem">
                 <FontAwesomeIcon icon={faPerson} className="headerIcon" />
                 <span
@@ -218,6 +219,7 @@ const Header = ({ type }) => {
             </div>
           </>
         )}
+        
       </div>
     </div>
   )

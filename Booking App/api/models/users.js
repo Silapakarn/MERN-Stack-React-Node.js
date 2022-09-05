@@ -5,8 +5,6 @@ import Joi from 'joi'
 import passwordComplexity from 'joi-password-complexity'
 
 
-
-
 //------------------------User----------------------
 export const userSchema = new mongoose.Schema({
 	firstName: { type: String, required: true },

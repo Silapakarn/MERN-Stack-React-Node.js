@@ -16,7 +16,7 @@ import {useLocation} from 'react-router-dom'
 import {SearchContext } from "../context/SearchContext.js";
 import {AuthContext} from "../context/AuthContext.js";
 import { useNavigate } from 'react-router-dom';
-import Reserve from '../pages/home/reserve/Reserve.jsx'
+
 
 
 
@@ -201,7 +201,7 @@ export default function Hotel() {
       </div>
       )}
 
-        {openModal && <Reserve setOpen={setOpenModal} hotelId={id}/>}
+    
     </div>
   )
 }

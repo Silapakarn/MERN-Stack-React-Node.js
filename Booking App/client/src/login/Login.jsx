@@ -61,13 +61,13 @@ export default function Singup() {
 						/>
 						{error && <div className='error_msg'>{error}</div>}
 						<button type="submit" className='green_btn'>
-							Sing In
+						Log In
 						</button>
 					</form>
 				</div>
 				<div className='right'>
-					<h1>New Here ?</h1>
-					<Link to="/signup">
+					<h2 style={{color: 'white'}}>New Here ?</h2>
+					<Link to="/">
 						<button type="button" className='white_btn'>
 							Sing Up
 						</button>
