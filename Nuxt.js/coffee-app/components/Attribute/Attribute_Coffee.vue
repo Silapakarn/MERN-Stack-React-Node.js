@@ -3,19 +3,15 @@
         
         <div class="Coffee_option">
 
-            <h1>Coffee</h1>
-
-         
-                <p v-for="post in posts" :key="post.id">{{post.title}}</p>
-        
+            <h1>Coffee</h1>        
 
             <div class="option_type">
                 <h3>Type</h3>
                 
                 <select>
-                    <option>Espresso</option>
-                    <option>Americano</option>
-                    <option>Latte</option>
+                    <option>{{postsCoffee_Espresso}}</option>
+                    <option>{{postsCoffee_Americano}}</option>
+                    <option>{{postsCoffee_Latte}}</option>
                 </select>
                
             </div>
@@ -25,9 +21,9 @@
                 <h3>Select sweetness</h3>
 
                 <select>
-                    <option>Default</option>
-                    <option>Less sugar</option>
-                    <option>More sugar</option>
+                    <option>{{postsSweetness_Default}}</option>
+                    <option>{{postsSweetness_LessSugar}}</option>
+                    <option>{{postsSweetness_MoreSugar}}</option>
                 </select>
             </div>
 
@@ -36,28 +32,28 @@
                 <h3>Hot or Cold?</h3>
 
                 <select>
-                    <option>Hot</option>
-                    <option>Cold</option>
+                    <option>{{posts_Hot}}</option>
+                    <option>{{posts_Cold}}</option>
                 </select>
             </div>
 
             <div class="option_type">
                 
-
-
                 <h3 value="straw">straw</h3>
-          
+                <input type="checkbox">
 
                 <h3 value="cup cover">cup cover</h3>
+                <input type="checkbox">
+                <!-- <label>{{checked}}</label> -->
                 
             </div>
 
             <div class="option_type">
                 <h3>Item number</h3>
-                <input type="number" name="quantity" min="1" max="10" >
+                <input type="number" min="1" max="10">
             </div>
 
-            <nuxt-link to="/Timer/Timer">
+            <nuxt-link to="/Payment/Payment">
                 <button class="button-68" type="button">Continue</button>
             </nuxt-link>
            
@@ -71,16 +67,41 @@
 export default {
     data(){
         return{
-            posts: []
-        }
-    },  
-    async asyncData({ $axios }) {
-        let {data} = await $axios.get('https://jsonplaceholder.typicode.com/todos')
+            postsCoffee_Espresso: '',
+            postsCoffee_Americano:'',
+            postsCoffee_Latte:'',
 
-        return {posts: data}
+            postsSweetness_Default: '',
+            postsSweetness_LessSugar: '',
+            postsSweetness_MoreSugar: '',
+
+            posts_Hot: '',
+            posts_Cold:'',
+        }
     },
-    head: {
-        title: 'รายการโพสต์'
+    mounted(){
+        this.asyncData_Coffee()
+    },
+    methods:{
+        async asyncData_Coffee() {
+            let data = await this.$axios.get('https://picsum.photos/v2/list')
+
+            console.log('res:',data.data)
+            
+            //-----------------Type-------------------
+            this.postsCoffee_Espresso = data.data[0].author;
+            this.postsCoffee_Americano = data.data[2].author;
+            this.postsCoffee_Latte = data.data[1].author;
+
+            //---------------Sweetness---------------
+            this.postsSweetness_Default = data.data[6].author;
+            this.postsSweetness_LessSugar = data.data[4].author;
+            this.postsSweetness_MoreSugar = data.data[5].author;
+
+            //---------------Hot or Cold?------------
+            this.posts_Hot = data.data[7].author
+            this.posts_Cold = data.data[8].author
+        },
     }
 }
 </script>

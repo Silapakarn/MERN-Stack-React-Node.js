@@ -32,9 +32,10 @@
 export default {
     data() {
         return {
-        dataListsCoffee: '',
-        dataListsTea:'',
-        dataListsSoft_drink:''
+            dataListsCoffee: '',
+            dataListsTea:'',
+            dataListsSoft_drink:'',
+
         }
     },
     mounted(){

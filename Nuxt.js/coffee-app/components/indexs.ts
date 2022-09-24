@@ -5,7 +5,7 @@ import Timer from './Timer/Timer'
 import Successfull from './Successfull/Successfull'
 import Out_of_stock from './Out_of_stock/Out_of_stock'
 import Not_enough_product from './Not_enough_product/Not_enough_product'
-
+import Payment from './Payment/Payment'
 
 
 export default{
@@ -15,5 +15,6 @@ export default{
     Timer: Timer.Timer,
     Successfull: Successfull.Successfull,
     Out_of_stock: Out_of_stock.Out_of_stock,
-    Not_enough_product: Not_enough_product.Not_enough_product
+    Not_enough_product: Not_enough_product.Not_enough_product,
+    Payment: Payment.Payment
 }

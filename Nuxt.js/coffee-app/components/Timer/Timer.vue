@@ -1,18 +1,38 @@
 <template>
     <div class="Timer">
-
+        
         <div class="Timer_container">
             <h2>machine is working please wait...</h2>
-            <h1>35</h1>
+            <h1>{{countDown}}</h1>
         </div>
-
+        
     </div>
 </template>
 
 
 <script>
+
 export default {
-    
+    data () {
+        return {
+            countDown: 35
+        }
+    },
+    methods: {
+        countDownTimer () {
+                if (this.countDown > 0) {
+                    setTimeout(() => {
+                        this.countDown -= 1
+                        this.countDownTimer()
+                    }, 1000)
+                }else{
+                    // navigateTo('/')
+                }
+            }
+        },
+        created () {
+            this.countDownTimer()
+    }
 }
 </script>
 
