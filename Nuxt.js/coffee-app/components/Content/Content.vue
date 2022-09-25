@@ -21,14 +21,19 @@
         <h2 >{{dataListsSoft_drink}}</h2> 
     </div>
 
-    <!-- <div v-for="dataList in dataLists" :key="dataList.id">
-        <h1>{{dataList[0].author}}</h1>
+    <!-- <div>
+        <h1>{{dataTestinNestJS}}  {{dataTestinNestJSs}}</h1>
+    </div> -->
+
+    <!-- <div>
+        <h1>{{}}</h1>
     </div> -->
 
     </div>
 </template>
 
 <script>
+
 export default {
     data() {
         return {
@@ -36,10 +41,13 @@ export default {
             dataListsTea:'',
             dataListsSoft_drink:'',
 
+            // dataTestinNestJS: '',
+            // dataTestinNestJSs: ''
         }
     },
     mounted(){
         this.fetchData()
+        // this.testAPI()
     },
     methods: {
         async fetchData() {
@@ -50,6 +58,14 @@ export default {
             this.dataListsTea = data.data[1].author;
             this.dataListsSoft_drink = data.data[2].author;
         },
+
+        // async testAPI() {
+        //     const data = await this.$axios.get('http://localhost:8800/user/');
+
+        //     console.log('Test_API_res:',data.data);
+        //     this.dataTestinNestJS = data.data[0].firstName
+        //     this.dataTestinNestJSs = data.data[0].lastName
+        // }
     }
 
    
