@@ -8,10 +8,10 @@
             <div class="option_type">
                 <h3>Type</h3>
                 
-                <select>
-                    <option>{{postsCoffee_Espresso}}</option>
-                    <option>{{postsCoffee_Americano}}</option>
-                    <option>{{postsCoffee_Latte}}</option>
+                <select id="type">
+                    <option>{{coffeeEspresso}}</option>
+                    <option>{{coffeeAmericano}}</option>
+                    <option>{{coffeeLatte}}</option>
                 </select>
                
             </div>
@@ -20,10 +20,10 @@
             <div class="option_type">
                 <h3>Select sweetness</h3>
 
-                <select>
-                    <option>{{postsSweetness_Default}}</option>
-                    <option>{{postsSweetness_LessSugar}}</option>
-                    <option>{{postsSweetness_MoreSugar}}</option>
+                <select id="sweetness">
+                    <option>{{sweetnessDefault}}</option>
+                    <option>{{sweetnessLessSugar}}</option>
+                    <option>{{sweetnessMoreSugar}}</option>
                 </select>
             </div>
 
@@ -31,30 +31,30 @@
             <div class="option_type">
                 <h3>Hot or Cold?</h3>
 
-                <select>
-                    <option>{{posts_Hot}}</option>
-                    <option>{{posts_Cold}}</option>
+                <select id="hotOrCold">
+                    <option>{{Hot}}</option>
+                    <option>{{Cold}}</option>
                 </select>
             </div>
 
-            <div class="option_type">
+ 
                 
-                <h3 value="straw">straw</h3>
-                <input type="checkbox">
+                <section id="checkboxOption" class="option_type">
+                    <h3>straw</h3>
+                    <input type="checkbox" value="straw">
 
-                <h3 value="cup cover">cup cover</h3>
-                <input type="checkbox">
-                <!-- <label>{{checked}}</label> -->
-                
-            </div>
+                    <h3>cup cover</h3>
+                    <input type="checkbox" value="cup cover">
+                </section>
+        
 
             <div class="option_type">
                 <h3>Item number</h3>
-                <input type="number" min="1" max="10">
+                <input type="number" min="1" max="10" id="numberItem">
             </div>
 
             <nuxt-link to="/Payment/Payment">
-                <button class="button-68" type="button">Continue</button>
+                <button @click="saveType" class="button-68" type="button">Continue</button>
             </nuxt-link>
            
            
@@ -67,41 +67,139 @@
 export default {
     data(){
         return{
-            postsCoffee_Espresso: '',
-            postsCoffee_Americano:'',
-            postsCoffee_Latte:'',
+            coffeeEspresso: [],
+            coffeeAmericano:[],
+            coffeeLatte:[],
 
-            postsSweetness_Default: '',
-            postsSweetness_LessSugar: '',
-            postsSweetness_MoreSugar: '',
+            sweetnessDefault: [],
+            sweetnessLessSugar: [],
+            sweetnessMoreSugar: [],
 
-            posts_Hot: '',
-            posts_Cold:'',
+            Hot: [],
+            Cold:[],
+
+            stockEspresso:[],
+            stockAmericano:[],
+            stockLatte:[],
+
+            durationEspresso:[],
+            durationAmericano:[],
+            durationLatte:[],
+
         }
     },
-    mounted(){
+    created(){
         this.asyncData_Coffee()
     },
     methods:{
         async asyncData_Coffee() {
-            let data = await this.$axios.get('https://picsum.photos/v2/list')
+            let data = await this.$axios.get('http://localhost:8800/coffee')
+            let dataAttribute = await this.$axios.get('http://localhost:8800/attribute')
 
-            console.log('res:',data.data)
+            console.log('resData:',data.data)
+            console.log('resDataAttribute:', dataAttribute.data)
             
             //-----------------Type-------------------
-            this.postsCoffee_Espresso = data.data[0].author;
-            this.postsCoffee_Americano = data.data[2].author;
-            this.postsCoffee_Latte = data.data[1].author;
+            this.coffeeEspresso = data.data[0].type;
+            this.coffeeAmericano = data.data[1].type;
+            this.coffeeLatte = data.data[2].type;
 
             //---------------Sweetness---------------
-            this.postsSweetness_Default = data.data[6].author;
-            this.postsSweetness_LessSugar = data.data[4].author;
-            this.postsSweetness_MoreSugar = data.data[5].author;
+            this.sweetnessDefault = data.data[0].sweetness;
+            this.sweetnessLessSugar = data.data[1].sweetness;
+            this.sweetnessMoreSugar = data.data[2].sweetness;
 
             //---------------Hot or Cold?------------
-            this.posts_Hot = data.data[7].author
-            this.posts_Cold = data.data[8].author
+            this.Hot = dataAttribute.data[0].type
+            this.Cold = dataAttribute.data[1].type
+
+            //----------------stock---------------------
+            this.stockEspresso = parseInt(data.data[0].stock) 
+            this.stockAmericano = parseInt(data.data[1].stock) 
+            this.stockLatte = parseInt(data.data[2].stock) 
+            //----------------Duration-----------------
+            this.durationEspresso = data.data[0].duration
+            this.durationAmericano = data.data[1].duration
+            this.durationLatte = data.data[2].duration
+
         },
+        saveType(){
+
+        
+           if(document.getElementById("type").value === 'Espresso'){
+                
+                    localStorage.setItem("id",1)
+
+                    let selectType = document.getElementById("type").value
+                    localStorage.setItem("type",selectType)
+
+                    let selectSweetness = document.getElementById("sweetness").value
+                    localStorage.setItem("sweetness",selectSweetness)
+
+                    let selectNumberItem = document.getElementById("numberItem").value
+                    localStorage.setItem("numberItem",selectNumberItem)
+                    
+                    let  selecthotOrCold = document.getElementById("hotOrCold").value
+                    localStorage.setItem("hotOrCold", selecthotOrCold)
+
+                    let selectCheckBoxOption = document.getElementById("checkboxOption").value
+                    localStorage.setItem("checkboxOption", selectCheckBoxOption)
+
+                    localStorage.setItem("stock", this.stockEspresso)
+
+                    localStorage.setItem("duration", this.durationEspresso)
+
+
+           }else if(document.getElementById("type").value === 'Americano'){
+            
+                    localStorage.setItem("id",2)
+
+                    let selectType = document.getElementById("type").value
+                    localStorage.setItem("type",selectType)
+
+                    let selectSweetness = document.getElementById("sweetness").value
+                    localStorage.setItem("sweetness",selectSweetness)
+
+                    let selectNumberItem = document.getElementById("numberItem").value
+                    localStorage.setItem("numberItem",selectNumberItem)
+                    
+                    let  selecthotOrCold = document.getElementById("hotOrCold").value
+                    localStorage.setItem("hotOrCold", selecthotOrCold)
+
+                    let selectCheckBoxOption = document.getElementById("checkboxOption").value
+                    localStorage.setItem("checkboxOption", selectCheckBoxOption)
+
+                    localStorage.setItem("stock", this.stockAmericano)
+
+                    localStorage.setItem("duration", this.durationAmericano)
+
+                
+
+           }else if(document.getElementById("type").value === 'Latte'){
+
+                    localStorage.setItem("id",3)
+
+                    let selectType = document.getElementById("type").value
+                    localStorage.setItem("type",selectType)
+
+                    let selectSweetness = document.getElementById("sweetness").value
+                    localStorage.setItem("sweetness",selectSweetness)
+
+                    let selectNumberItem = document.getElementById("numberItem").value
+                    localStorage.setItem("numberItem",selectNumberItem)
+
+                    let  selecthotOrCold = document.getElementById("hotOrCold").value
+                    localStorage.setItem("hotOrCold", selecthotOrCold)
+
+                    let selectCheckBoxOption = document.getElementById("checkboxOption").value
+                    localStorage.setItem("checkboxOption", selectCheckBoxOption)
+
+                    localStorage.setItem("stock", this.stockLatte)
+
+                    localStorage.setItem("duration", this.durationLatte)
+           }
+            
+        }
     }
 }
 </script>

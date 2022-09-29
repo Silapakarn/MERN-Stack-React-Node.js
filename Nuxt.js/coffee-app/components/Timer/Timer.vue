@@ -3,7 +3,7 @@
         
         <div class="Timer_container">
             <h2>machine is working please wait...</h2>
-            <h1>{{countDown}}</h1>
+            <h1>{{duration}}</h1>
         </div>
         
     </div>
@@ -15,24 +15,62 @@
 export default {
     data () {
         return {
-            countDown: 35
+            countDown: 35,
+            duration: 0,
+            types: '',
+            hotOrCole: '',
+            durationCold: 0,
+            numberItem: 0,
+            
         }
     },
     methods: {
-        countDownTimer () {
-                if (this.countDown > 0) {
-                    setTimeout(() => {
-                        this.countDown -= 1
-                        this.countDownTimer()
-                    }, 1000)
-                }else{
-                    // navigateTo('/')
-                }
-            }
+        async asyncData_Duration() {
+            let dataAttribute = await this.$axios.get('http://localhost:8800/attribute')
+            this.durationCold = parseInt(dataAttribute.data[1].duration)
+
+            console.log('dataAttribute:',dataAttribute.data)
+            console.log('durationCold:',this.durationCold)
         },
-        created () {
-            this.countDownTimer()
+        getValueInLocalStorage(){
+            let selectType =  localStorage.getItem("type")
+            let selectDuration = localStorage.getItem("duration")
+            let selectHotOrCole = localStorage.getItem("hotOrCold")
+            let selectNumberItem = localStorage.getItem("numberItem")
+
+            this.types = selectType
+            this.duration = parseInt(selectDuration)
+            this.hotOrCole = selectHotOrCole
+            this.numberItem = parseInt(selectNumberItem)
+
+            if(this.hotOrCole === 'Cold'){
+                this.duration = parseInt(selectDuration) + 5 
+            }else{
+                this.duration = parseInt(selectDuration)
+            }
+
+            console.log('hotOrCole:',this.hotOrCole)
+            console.log('duration:',this.duration)
+        },
+        countDownDuration(){
+            if(this.duration > 0){
+                setTimeout(() => {
+                    this.duration -= 1
+                    this.countDownDuration()
+                }, 1000);
+            }else{
+                this.$router.push("/Successfull/Successfull")
+            }
+        }
+    },
+    created () {
+        this.getValueInLocalStorage(),
+        this.asyncData_Duration()
+    },
+    mounted(){
+        this.countDownDuration()
     }
+
 }
 </script>
 

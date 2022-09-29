@@ -9,9 +9,6 @@
 </template>
 
 
-
-
-
 <script lang="ts">
 
 import Components from '@/components/indexs'

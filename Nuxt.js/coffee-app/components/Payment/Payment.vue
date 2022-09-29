@@ -3,22 +3,24 @@
 
         <div class = "payment_container" >
 
-            <h1> Payment </h1> <p> item </p> 
+            <h1> Payment </h1> <p>{{types}} item </p> 
 
-            <p> selected numberItem cup * price 
-            per order </p> 
+            <p> {{numberItem}} cup * {{price}} 
+            Bath per order </p> 
             
-            <h2> Calculator * numberItem
+            <h2> {{price * numberItem}}
             Bath </h2>
             
             <img src="https://cdn-icons-png.flaticon.com/512/438/438526.png"/>
 
-
-        <div>
-            <nuxt-link to="/Timer/Timer">
-                <button class = "button-68" type = "button">Pay</button> 
-            </nuxt-link>
-        </div>
+            <!-- Test -->
+            <!-- <h1>{{id }}</h1> -->
+                
+            <div>
+                
+                    <button class = "button-68" type = "button" @click="savePayment">Pay</button> 
+                
+            </div>
             
         
         </div> 
@@ -26,9 +28,111 @@
 </template>
 
 <script>
+
 export default {
-    
+    data(){
+        return {
+            price: [],
+
+            types:'',
+            sweetness:'',
+            numberItem:0,
+            hotOrCole: '',
+            stock:0,
+            id:[],
+
+            stockUpdate:0,
+
+            //------data for patch------
+            // dataUpdate:{
+            //     "stock": this.stockUpdate
+            // }
+        }
+    },created(){
+        this.asyncData(),
+        this.getValueInLocalStorage()
+    },
+    mounted(){
+        
+    },
+    methods:{
+        async asyncData() {
+            let data = await this.$axios.get('http://localhost:8800/coffee')
+            let dataAttribute = await this.$axios.get('http://localhost:8800/attribute')
+
+            console.log('asyncData:',data.data)
+            console.log('dataAttribute:', dataAttribute.data)
+
+            //---------------stockUpdate--------------
+            this.stockUpdate = parseInt(this.stock -  this.numberItem)
+            console.log('stockUpdate:', this.stockUpdate)
+
+            //-----------------Type-------------------
+            if(this.types === 'Espresso' && this.hotOrCole === 'Cold'){
+                return this.price = data.data[0].price + dataAttribute.data[1].price
+            }else if(this.types === 'Espresso'){
+                return this.price = data.data[0].price
+            }else if(this.types === 'Americano' && this.hotOrCole === 'Cold'){
+                return this.price = data.data[1].price + dataAttribute.data[1].price
+            }else if(this.types === 'Americano'){
+                return this.price = data.data[1].price
+            }else if(this.types === 'Latte' && this.hotOrCole === 'Cold'){
+                return this.price = data.data[2].price + dataAttribute.data[1].price
+            }else if(this.types === 'Latte'){
+                return this.price = data.data[2].price
+            }
+
+        },
+        getValueInLocalStorage(){
+            let selectType =  localStorage.getItem("type")
+            let selectNumberItem = localStorage.getItem("numberItem")
+            let selectHotOrCole = localStorage.getItem("hotOrCold")
+            let selectStock = localStorage.getItem("stock")
+            let selectId = localStorage.getItem("id")
+
+            this.types = selectType
+            this.numberItem = parseInt(selectNumberItem)   
+            this.hotOrCole = selectHotOrCole
+            this.stock =  parseInt(selectStock)
+            this.id = selectId
+
+            console.log('stock:',this.stock)
+            console.log('numberItem:',this.numberItem)
+        },
+        async savePayment(){
+                if(this.stockUpdate >= 0 && this.stock >= this.numberItem){
+                    if(this.types === 'Espresso'){
+                        await this.$axios.$patch(`http://localhost:8800/coffee/1`, {
+                        "stock": this.stockUpdate
+                        })
+                        console.log('Save Data  stock !!')
+                        this.$router.push("/Timer/Timer")
+                    }else if(this.types === 'Americano'){
+                        await this.$axios.$patch(`http://localhost:8800/coffee/2`, {
+                        "stock": this.stockUpdate
+                        })
+                        console.log('Save Data  stock !!')
+                        this.$router.push("/Timer/Timer")
+                    }else if(this.types === 'Latte'){
+                        await this.$axios.$patch(`http://localhost:8800/coffee/3`, {
+                        "stock": this.stockUpdate
+                        })
+                        console.log('Save Data  stock !!')
+                        this.$router.push("/Timer/Timer")
+                    }
+                }else if(this.stock < this.numberItem && this.stock > 0){
+                    this.$router.push("/Not_enough_product/Not_enough_product")
+                }else if(this.stock === 0){
+                    this.$router.push("/Out_of_stock/Out_of_stock")
+                }
+               
+        }
+    }
 }
+
+
+
+
 </script>
 
 <style scoped>

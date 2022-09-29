@@ -5,6 +5,8 @@ import { UsersModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Connection } from 'typeorm';
 import { CategoriesModule } from './categories/categories.module';
+import { CoffeeModule } from './coffee/coffee.module';
+import { AttributeModule } from './attribute/attribute.module';
 
 
 @Module({
@@ -20,7 +22,9 @@ import { CategoriesModule } from './categories/categories.module';
     synchronize: true,
   }),
   UsersModule,
-  CategoriesModule
+  CategoriesModule,
+  CoffeeModule,
+  AttributeModule
 ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,34 +1,25 @@
 <template>
-    <div class = "categories" >
+    <div class = "categories">
 
-    <nuxt-link to="/Attribute/Attribute_Coffee">
-        <div class = "categories_coffee">
-                <img src = "https://cdn-icons-png.flaticon.com/512/571/571504.png"
-                alt = "" >
-                <h2>{{dataListsCoffee}}</h2> 
+        <nuxt-link to="/Attribute/Attribute_Coffee">
+            <div class = "categories_coffee">
+                    <img src = "https://cdn-icons-png.flaticon.com/512/571/571504.png"
+                    alt = "" >
+                    <h2>{{dataListsCoffee}}</h2> 
+            </div>
+        </nuxt-link>
+
+        <div class = "categories_tea">
+            <img src = "https://cdn-icons-png.flaticon.com/512/571/571545.png"
+            alt = "" >
+            <h2 >{{dataListsTea}}</h2> 
         </div>
-    </nuxt-link>
 
-    <div class = "categories_tea">
-        <img src = "https://cdn-icons-png.flaticon.com/512/571/571545.png"
-        alt = "" >
-        <h2 >{{dataListsTea}}</h2> 
-    </div>
-
-    <div class = "categories_tea">
-        <img src = "https://cdn-icons-png.flaticon.com/512/571/571463.png"
-        alt = "" >
-        <h2 >{{dataListsSoft_drink}}</h2> 
-    </div>
-
-    <!-- <div>
-        <h1>{{dataTestinNestJS}}  {{dataTestinNestJSs}}</h1>
-    </div> -->
-
-    <!-- <div>
-        <h1>{{}}</h1>
-    </div> -->
-
+        <div class = "categories_tea">
+            <img src = "https://cdn-icons-png.flaticon.com/512/571/571463.png"
+            alt = "" >
+            <h2 >{{dataListsSoft_drink}}</h2> 
+        </div>
     </div>
 </template>
 
@@ -39,36 +30,22 @@ export default {
         return {
             dataListsCoffee: '',
             dataListsTea:'',
-            dataListsSoft_drink:'',
-
-            // dataTestinNestJS: '',
-            // dataTestinNestJSs: ''
+            dataListsSoft_drink:'',            
         }
     },
     mounted(){
-        this.fetchData()
-        // this.testAPI()
+        this.categories_API()
     },
     methods: {
-        async fetchData() {
-            const data = await this.$axios.get('https://picsum.photos/v2/list?limit=12');
+        async categories_API() {
+            const data = await this.$axios.get('http://localhost:8800/categories/');
 
-            console.log('res:',data.data);
-            this.dataListsCoffee = data.data[0].author;
-            this.dataListsTea = data.data[1].author;
-            this.dataListsSoft_drink = data.data[2].author;
-        },
-
-        // async testAPI() {
-        //     const data = await this.$axios.get('http://localhost:8800/user/');
-
-        //     console.log('Test_API_res:',data.data);
-        //     this.dataTestinNestJS = data.data[0].firstName
-        //     this.dataTestinNestJSs = data.data[0].lastName
-        // }
+            console.log('categories_res:',data.data);
+            this.dataListsCoffee = data.data[0].beverages;
+            this.dataListsTea = data.data[1].beverages;
+            this.dataListsSoft_drink = data.data[2].beverages;
+        }
     }
-
-   
 }
 </script>
 
@@ -79,8 +56,10 @@ export default {
     justify-content: space-between;
     flex-wrap: wrap;
     padding: 40px;
+    
+    /* max-width: 60%; */
     /* margin-top: 20px */
-    /* border: 2px solid rgb(187, 106, 0); */
+    border: 2px solid rgb(187, 106, 0);
 }
 
 .categories_coffee{
@@ -126,7 +105,4 @@ img{
     max-width: 300px;
     max-height: 400px;
 }
-
-
-
 </style>
