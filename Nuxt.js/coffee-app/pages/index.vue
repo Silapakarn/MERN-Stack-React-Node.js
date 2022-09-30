@@ -1,7 +1,6 @@
 <template>
   
-  <div>
-    <Navbar />
+  <div class="bg">
     <Content />
 
   </div>
@@ -22,3 +21,9 @@ export default{
     components: { Content, Navbar },
 }
 </script>
+
+<style scoped>
+div{
+  font-family: 'Inter Tight', sans-serif;
+}
+</style>

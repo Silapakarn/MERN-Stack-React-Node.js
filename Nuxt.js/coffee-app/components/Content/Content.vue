@@ -1,25 +1,28 @@
 <template>
     <div class = "categories">
 
-        <nuxt-link to="/Attribute/Attribute_Coffee">
-            <div class = "categories_coffee">
+        <div class="categoriesNuxt">   
+            <!-- <nuxt-link to="/Attribute/Attribute_Coffee"> -->
+            <div class = "categories_coffee" @click="routeAttributeCoffee">
                     <img src = "https://cdn-icons-png.flaticon.com/512/571/571504.png"
                     alt = "" >
                     <h2>{{dataListsCoffee}}</h2> 
             </div>
-        </nuxt-link>
+            <!-- </nuxt-link> -->
 
-        <div class = "categories_tea">
-            <img src = "https://cdn-icons-png.flaticon.com/512/571/571545.png"
-            alt = "" >
-            <h2 >{{dataListsTea}}</h2> 
-        </div>
+            <div class = "categories_tea">
+                <img src = "https://cdn-icons-png.flaticon.com/512/571/571545.png"
+                alt = "" >
+                <h2 >{{dataListsTea}}</h2> 
+            </div>
 
-        <div class = "categories_tea">
-            <img src = "https://cdn-icons-png.flaticon.com/512/571/571463.png"
-            alt = "" >
-            <h2 >{{dataListsSoft_drink}}</h2> 
+            <div class = "categories_tea">
+                <img src = "https://cdn-icons-png.flaticon.com/512/571/571463.png"
+                alt = "" >
+                <h2 >{{dataListsSoft_drink}}</h2> 
+            </div>
         </div>
+        
     </div>
 </template>
 
@@ -44,22 +47,35 @@ export default {
             this.dataListsCoffee = data.data[0].beverages;
             this.dataListsTea = data.data[1].beverages;
             this.dataListsSoft_drink = data.data[2].beverages;
+        },
+        routeAttributeCoffee(){
+            this.$router.push("/Attribute/Attribute_Coffee")
         }
     }
 }
 </script>
 
 <style scoped>
-    
 .categories{
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    padding: 40px;
-    
+    /* padding: 40px; */
+    background-image: url("../../assets/bg.jpg");
+    background-repeat: no-repeat;
+    /* background-attachment: fixed; */
+    background-position: center;
     /* max-width: 60%; */
     /* margin-top: 20px */
-    border: 2px solid rgb(187, 106, 0);
+    padding-bottom: 360px;
+    border: 2px solid rgb(255, 255, 255);
+}
+
+.categoriesNuxt{
+    display: flex;
+    lex-wrap: wrap;
+    justify-content: center;
+    margin: auto;
+    width: 100%;
+    margin-top:260px;
+    /* border: 2px solid rgb(187, 0, 0); */
 }
 
 .categories_coffee{
@@ -88,6 +104,7 @@ export default {
     text-align: center;
     background-color: rgb(241, 241, 241);
     padding: 20px;
+    margin-left: 50px;
     border-radius: 10px;
     cursor: pointer;
 }

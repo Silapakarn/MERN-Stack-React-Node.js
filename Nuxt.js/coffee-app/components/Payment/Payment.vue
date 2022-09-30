@@ -40,13 +40,8 @@ export default {
             hotOrCole: '',
             stock:0,
             id:[],
-
+            
             stockUpdate:0,
-
-            //------data for patch------
-            // dataUpdate:{
-            //     "stock": this.stockUpdate
-            // }
         }
     },created(){
         this.asyncData(),
@@ -125,7 +120,6 @@ export default {
                 }else if(this.stock === 0){
                     this.$router.push("/Out_of_stock/Out_of_stock")
                 }
-               
         }
     }
 }

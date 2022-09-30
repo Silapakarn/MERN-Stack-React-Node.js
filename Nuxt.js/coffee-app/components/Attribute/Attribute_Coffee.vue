@@ -2,8 +2,8 @@
     <div class="Coffee">
         
         <div class="Coffee_option">
-
-            <h1>Coffee</h1>        
+            <img src="../../assets/coffee.png">
+            <!-- <h1>Coffee</h1>         -->
 
             <div class="option_type">
                 <h3>Type</h3>
@@ -206,25 +206,46 @@ export default {
 
 
 <style scoped>
-    .Coffee{
-    display: flex;
-    justify-content: center;
-    padding-top: 70px;
+.Coffee{
+    background-image: url("../../assets/Attribute.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    font-family: 'Inter Tight', sans-serif;
+    /* display: flex;
+    justify-content: center; */
+    /* padding-top: 500px; */
+    padding-bottom: 300px;
+
+    border: 3px solid rgb(255, 255, 255);
     }
 
 
+
 .Coffee_option{
-    /* border: 1px solid red;  */
+    margin: auto;
+    width: 30%;
+    margin-top: 90px;
+    /* border: 2px solid red;  */
     padding: 40px;
-    padding-left: 100px;
-    padding-right: 100px;
+    padding-left: 40px;
+    padding-right: 40px;
     background-color: rgb(241, 241, 241);
     border-radius: 10px;
     text-align: center;
 }
 
+.Coffee_option img{
+    max-width: 150px;
+    max-height: 150px;
+}
+
+.Coffee_option h1{
+    color: #27ae60;
+}
+
 .option_type h3{
     padding-right: 10px;
+    color:rgb(102, 102, 102)
 }
 
 .option_type{
@@ -240,34 +261,34 @@ export default {
 /* CSS */
 .button-68 {
     margin-top: 50px;
-  appearance: none;
-  backface-visibility: hidden;
-  background-color: #27ae60;
-  border-radius: 8px;
-  border-style: none;
-  box-shadow: rgba(39, 174, 96, .15) 0 4px 9px;
-  box-sizing: border-box;
-  color: #fff;
-  cursor: pointer;
-  display: inline-block;
-  font-family: Inter,-apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: normal;
-  line-height: 1.5;
-  outline: none;
-  overflow: hidden;
-  padding: 13px 20px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  transform: translate3d(0, 0, 0);
-  transition: all .3s;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  vertical-align: top;
-  white-space: nowrap;
+    appearance: none;
+    backface-visibility: hidden;
+    background-color: #42ce7d;
+    border-radius: 8px;
+    border-style: none;
+    box-shadow: rgba(39, 174, 96, .15) 0 4px 9px;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Inter,-apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: normal;
+    line-height: 1.5;
+    outline: none;
+    overflow: hidden;
+    padding: 13px 20px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    transform: translate3d(0, 0, 0);
+    transition: all .3s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: top;
+    white-space: nowrap;
 }
 
 .button-68:hover {
