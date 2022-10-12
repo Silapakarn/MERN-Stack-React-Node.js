@@ -1,0 +1,69 @@
+server:
+  port: 1150
+
+app:
+  upload:
+  path: images
+
+spring:
+   servlet:
+    multipart:
+      max-file-size: 512KB
+      max-request-size: 512KB
+
+---
+spring:
+  profiles:
+    active: dev
+    
+---
+  spring:
+    profiles: dev
+    datasource: 
+     url: jdbc:postgresql://localhost:3300/Demo
+    username: postgres
+    password: 
+
+    jpa:
+      properties: 
+        hibernate: 
+          format_sql:  true
+      show-sql: true
+      hibernate.ddl-auto: update
+---
+
+  spring:
+    profiles: test
+    datasource: 
+     url: jdbc:h2:mem:iblurblur
+    username: sa
+    password: Trl1234!
+
+    jpa:
+      properties: 
+        hibernate: 
+          format_sql:  true
+      show-sql: true
+      hibernate.ddl-auto: create-drop
+      h2: 
+        console: 
+          enabled: true
+---
+
+ spring:
+    profiles: prod
+    datasource: 
+     url: jdbc:postgresql://tiny.db.elephantsql.com/egqqnqve
+    username: egqqnqve
+    password: NlrWMZCKAXeD49KKhjLNXQj14w9o9tv3
+
+    jpa:
+      properties: 
+        hibernate: 
+          format_sql:  true
+      show-sql: true
+      hibernate.ddl-auto: update
+      
+      server:
+        port: 1112
+---

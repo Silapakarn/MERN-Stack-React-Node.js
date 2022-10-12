@@ -1,0 +1,9 @@
+server.port=1112
+
+
+spring.datasource.url=jdbc:postgresql://tiny.db.elephantsql.com/egqqnqve
+spring.datasource.username=egqqnqve
+spring.datasource.password=NlrWMZCKAXeD49KKhjLNXQj14w9o9tv3
+
+
+spring.jpa.hibernate.ddl-auto=create

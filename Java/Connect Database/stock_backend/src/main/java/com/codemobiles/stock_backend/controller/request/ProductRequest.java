@@ -20,4 +20,8 @@ public class ProductRequest {
 	private MultipartFile image;
 	private int price;
 	private int stock;
+	public Object getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
