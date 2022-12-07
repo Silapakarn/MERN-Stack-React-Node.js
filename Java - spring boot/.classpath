@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="backend/src/main/java"/>
+	<classpathentry kind="src" path="backend/src/test/java"/>
+	<classpathentry kind="src" path="Clone Java and Vue/spring-boot-device-seller/.mvn/wrapper"/>
+	<classpathentry kind="src" path="Clone Java and Vue/spring-boot-device-seller/src/main/java"/>
+	<classpathentry kind="src" path="Clone Java and Vue/spring-boot-device-seller/src/test/java"/>
+	<classpathentry kind="src" path="demo/src/main/java"/>
+	<classpathentry kind="src" path="demo/src/test/java"/>
+	<classpathentry kind="src" path="demoConnectToDatabase/src/main/java"/>
+	<classpathentry kind="src" path="demoConnectToDatabase/src/test/java"/>
+	<classpathentry kind="src" path="in28minutes/spring-boot-master-class/01.Spring-Boot-Introduction-In-10-Steps-V2/src/main/java"/>
+	<classpathentry kind="src" path="in28minutes/spring-boot-master-class/01.Spring-Boot-Introduction-In-10-Steps-V2/src/test/java"/>
+	<classpathentry kind="src" path="in28minutes/spring-boot-master-class/01.Spring-Boot-Introduction-In-10-Steps/src/main/java"/>
+	<classpathentry kind="src" path="in28minutes/spring-boot-master-class/01.Spring-Boot-Introduction-In-10-Steps/src/test/java"/>
+	<classpathentry kind="src" path="in28minutes/spring-boot-master-class/02.Spring-Boot-Web-Application-V2/src/main/java"/>
+	<classpathentry kind="src" path="in28minutes/spring-boot-master-class/02.Spring-Boot-Web-Application-V2/src/test/java"/>
+	<classpathentry kind="src" path="in28minutes/spring-boot-master-class/02.Spring-Boot-Web-Application/src/main/java"/>
+	<classpathentry kind="src" path="in28minutes/spring-boot-master-class/02.Spring-Boot-Web-Application/src/test/java"/>
+	<classpathentry kind="src" path="in28minutes/spring-boot-master-class/03.JUnit-Introduction-In-5-Steps-V2/src"/>
+	<classpathentry kind="src" path="in28minutes/spring-boot-master-class/03.JUnit-Introduction-In-5-Steps-V2/test"/>
+	<classpathentry kind="src" path="in28minutes/spring-boot-master-class/03.JUnit-Introduction-In-5-Steps/src"/>
+	<classpathentry kind="src" path="in28minutes/spring-boot-master-class/03.JUnit-Introduction-In-5-Steps/test"/>
+	<classpathentry kind="src" path="in28minutes/spring-boot-master-class/04.Mockito-Introduction-In-5-Steps-V2/src/main/java"/>
+	<classpathentry kind="src" path="in28minutes/spring-boot-master-class/04.Mockito-Introduction-In-5-Steps-V2/src/test/java"/>
+	<classpathentry kind="src" path="in28minutes/spring-boot-master-class/04.Mockito-Introduction-In-5-Steps/src/main/java"/>
+	<classpathentry kind="src" path="in28minutes/spring-boot-master-class/04.Mockito-Introduction-In-5-Steps/src/test/java"/>
+	<classpathentry kind="src" path="in28minutes/spring-boot-master-class/05.Spring-Boot-Advanced-V2/src/main/java"/>
+	<classpathentry kind="src" path="in28minutes/spring-boot-master-class/05.Spring-Boot-Advanced-V2/src/test/java"/>
+	<classpathentry kind="src" path="in28minutes/spring-boot-master-class/05.Spring-Boot-Advanced/src/main/java"/>
+	<classpathentry kind="src" path="in28minutes/spring-boot-master-class/05.Spring-Boot-Advanced/src/test/java"/>
+	<classpathentry kind="src" path="in28minutes/spring-boot-master-class/06.JPA-Introduction-In-10-Steps/src/main/java"/>
+	<classpathentry kind="src" path="in28minutes/spring-boot-master-class/06.JPA-Introduction-In-10-Steps/src/test/java"/>
+	<classpathentry kind="src" path="in28minutes/spring-boot-master-class/09.Spring-Introduction-In-10-Steps/src/main/java"/>
+	<classpathentry kind="src" path="in28minutes/spring-boot-master-class/09.Spring-Introduction-In-10-Steps/src/test/java"/>
+	<classpathentry kind="src" path="learn-spring-boot/src/main/java"/>
+	<classpathentry kind="src" path="learn-spring-boot/src/test/java"/>
+	<classpathentry kind="src" path="myfirstwebapp/src/main/java"/>
+	<classpathentry kind="src" path="myfirstwebapp/src/test/java"/>
+	<classpathentry kind="src" path="spring-batch/src/main/java"/>
+	<classpathentry kind="src" path="spring-batch/src/test/java"/>
+	<classpathentry kind="src" path="spring-boot-device-seller-master/.mvn/wrapper"/>
+	<classpathentry kind="src" path="spring-boot-device-seller-master/src/main/java"/>
+	<classpathentry kind="src" path="spring-boot-device-seller-master/src/test/java"/>
+	<classpathentry kind="src" path="test/stock_backend/src/main/java"/>
+	<classpathentry kind="src" path="test/stock_backend/src/test/java"/>
+	<classpathentry kind="src" path="validation-exception-handling/src/main/java"/>
+	<classpathentry kind="src" path="validation-exception-handling/src/test/java"/>
+	<classpathentry kind="lib" path="backend/.mvn/wrapper/maven-wrapper.jar"/>
+	<classpathentry kind="lib" path="backend/bin/.mvn/wrapper/maven-wrapper.jar"/>
+	<classpathentry kind="lib" path="demo/.mvn/wrapper/maven-wrapper.jar"/>
+	<classpathentry kind="lib" path="demoConnectToDatabase/.mvn/wrapper/maven-wrapper.jar"/>
+	<classpathentry kind="lib" path="in28minutes/spring-boot-master-class/04.Mockito-Introduction-In-5-Steps/.mvn/wrapper/maven-wrapper.jar"/>
+	<classpathentry kind="lib" path="in28minutes/spring-boot-master-class/06.JPA-Introduction-In-10-Steps/.mvn/wrapper/maven-wrapper.jar"/>
+	<classpathentry kind="lib" path="learn-spring-boot/.mvn/wrapper/maven-wrapper.jar"/>
+	<classpathentry kind="lib" path="myfirstwebapp/.mvn/wrapper/maven-wrapper.jar"/>
+	<classpathentry kind="lib" path="myfirstwebapp/target/learn-spring-boot-0.0.1-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="test/stock_backend/.mvn/wrapper/maven-wrapper.jar"/>
+	<classpathentry kind="output" path="Clone Java and Vue/spring-boot-device-seller/target/classes"/>
+</classpath>
