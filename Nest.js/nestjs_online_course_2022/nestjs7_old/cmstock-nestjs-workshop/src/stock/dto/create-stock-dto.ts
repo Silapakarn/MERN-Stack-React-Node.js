@@ -1,9 +1,9 @@
-import { IsNotEmpty, MinLength } from "class-validator";
+import { IsNotEmpty, MinLength } from 'class-validator'
 
 export class CreateStockDto {
 
     @IsNotEmpty()
-    @MinLength(5, {
+    @MinLength(10, {
         message: "Name is too short"
     })
     name: string;

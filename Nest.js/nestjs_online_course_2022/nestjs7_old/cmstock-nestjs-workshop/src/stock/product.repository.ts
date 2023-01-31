@@ -1,4 +1,4 @@
-import { CreateStockDto } from './dto/create-stock-sto';
+import { CreateStockDto } from './dto/create-stock-dto';
 import { Product } from './product.entity';
 import { Repository, EntityRepository } from "typeorm";
 
@@ -14,4 +14,4 @@ export class ProductRepository extends Repository<Product>{
         await product.save()
         return product
     }
-} 
+}

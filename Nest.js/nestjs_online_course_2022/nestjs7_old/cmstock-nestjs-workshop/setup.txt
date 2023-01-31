@@ -1,0 +1,29 @@
+yarn add class-transformer class-validator
+yarn add change-case
+yarn add rxjs typeorm @nestjs/typeorm pg
+(ต้องใช้ทั้ง typeorm และ @nestjs/typeorm)
+
+// Setup TypeOrm configuration
+import { TypeOrmModuleOptions } from '@nestjs/typeorm'
+export const typeOrmConfig: TypeOrmModuleOptions = {
+    type: 'postgres',
+    host: 'localhost',
+    port: 5432,
+    username: 'postgres',
+    password: 'postgres',
+    database: 'cmstock',
+    entities: [__dirname + '/../**/*.entity.{js,ts}'],
+    synchronize: true,
+}
+
+
+import { diskStorage } from "multer";
+import * as fsExtra from 'fs-extra'
+import { extname } from 'path';
+
+yarn add multer fs-extra
+
+https://github.com/typeorm/typeorm/blob/master/docs/entities.md#column-types-for-postgres
+
+
+
