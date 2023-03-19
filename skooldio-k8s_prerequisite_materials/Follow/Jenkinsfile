@@ -1,0 +1,130 @@
+
+
+pipeline {
+    agent any
+    options { timestamps () }
+
+    stages {
+        stage('Build Jar') {
+            tools {
+                   jdk "jdk11"
+                }
+            steps {
+                script{
+                    echo """Build Jar... ${git_url}"""
+                    sh """
+                        id
+                        pwd
+                        ls -altr
+                        
+                        """
+                    // [$class: 'SubmoduleOption',
+                    //     disableSubmodules: false,
+                    //     parentCredentials: false,
+                    //     recursiveSubmodules: true,
+                    //     reference: '',
+                    //     trackingSubmodules: false]
+                    checkout(
+                            [$class: 'GitSCM', branches: [[name: """refs/tags/${image_version}"""]], 
+                            doGenerateSubmoduleConfigurations: false, 
+                            extensions: [
+                                [$class: 'SubmoduleOption', disableSubmodules: true, 
+                                parentCredentials: false, recursiveSubmodules: false, reference: '',
+                                trackingSubmodules: true]
+                                
+                            ], 
+                            submoduleCfg: [], 
+                            userRemoteConfigs: [[credentialsId: "git-clone", 
+                                url: "${git_url}"]]])
+                    if(params.build_jar_flag){
+                        sh """
+                        java -version
+                        id
+                        pwd
+                        ls -ltr
+                        
+                        ./mvnw clean package -DskipTests
+                        
+                        ls -ltr target
+                        
+                        """
+                    }
+                }
+            }
+        }
+        
+        stage('Build Image') {
+            steps {
+                echo """Build Image... ${image_name}:${image_version}"""
+                // sh """ rm -rf *"""
+                script{
+                    if(params.build_image_flag){
+                        
+                        sh """
+                        #curl -v http://sit-nexus.tgh.co.th:8082/v2/
+                        #ip a
+                        id
+                        pwd
+                        mv  ./target/$jar_name ./docker/
+                        
+                        cd ./docker/
+                        ls -ltr
+                        #ls -ltr db-change/
+                        #docker login  -u admin -p P@ssw0rd123 sit-nexus.tgh.co.th:8082
+                        #docker login  -u admin -p P@ssw0rd123 uat-nexus.tgh.co.th:8082
+                        docker build -t ${image_name}:${image_version} -f custom-dockerfile .
+                        docker image ls ${image_name}
+                        
+                        #docker tag ${image_name}:${image_version} ${image_host_sit}${image_name}:${image_version}
+                        #docker tag ${image_name}:${image_version} ${image_host_uat}${image_name}:${image_version}
+                        """
+                    }
+                }
+            }
+        }
+        
+        stage('Push Image') {
+            steps {
+                script{
+                    if(params.push_flag_sit){
+                        sh """
+                        docker tag ${image_name}:${image_version} ${image_host_sit}${image_name}:${image_version}
+                        docker push ${image_host_sit}${image_name}:${image_version}
+                        """
+                    }
+                    if(params.push_flag_uat){
+                        sh """
+                        docker tag ${image_name}:${image_version} ${image_host_uat}${image_name}:${image_version}
+                        docker push ${image_host_uat}${image_name}:${image_version}
+                        """
+                    }
+                    if(params.push_flag_poc){
+                        sh """
+                        docker tag ${image_name}:${image_version} ${image_host_poc}${image_name}:${image_version}
+                        docker push ${image_host_poc}${image_name}:${image_version}
+                        """
+                    }
+                }
+            }
+        }
+    }
+    
+    post {
+        always {
+            echo "You can always see this"
+            sh """
+            ls -ltr target
+            """
+        }
+        success {
+            echo "The job ran successfully"
+        }
+        unstable {
+            echo "Gear up! The build is unstable. Try fix it"
+        }
+        failure {
+            echo "OMG! The build failed"
+        }
+    }
+    
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Clone Java and Vue/spring-boot-device-seller" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/in28minutes/spring-boot-master-class" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/spring-batch" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/spring-boot-device-seller-master" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/validation-exception-handling" vcs="Git" />
+  </component>
+</project>
