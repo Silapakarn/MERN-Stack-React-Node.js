@@ -1,0 +1,132 @@
+pipeline {
+    agent any
+    options { timestamps () }
+
+    stages {
+                            
+        stage('Build Jar') {
+            tools {
+                   jdk "jdk11"
+                }
+            steps {
+                script{
+                    echo """Build Jar... ${git_url}"""
+                    sh """
+                        id
+                        pwd
+                        ls -altr
+                        
+                        """
+                    // [$class: 'SubmoduleOption',
+                    //     disableSubmodules: false,
+                    //     parentCredentials: false,
+                    //     recursiveSubmodules: true,
+                    //     reference: '',
+                    //     trackingSubmodules: false]
+                    checkout(
+                            [$class: 'GitSCM', branches: [[name: """refs/tags/${image_version}"""]], 
+                            doGenerateSubmoduleConfigurations: false, 
+                            extensions: [
+                                [$class: 'SubmoduleOption', disableSubmodules: true, 
+                                parentCredentials: false, recursiveSubmodules: false, reference: '',
+                                trackingSubmodules: true]
+                                
+                            ], 
+                            submoduleCfg: [], 
+                            userRemoteConfigs: [[credentialsId: "git-clone", 
+                                url: "${git_url}"]]])
+                    if(params.build_jar_flag){
+                        sh """
+                        java -version
+                        id
+                        pwd
+                        ls -ltr
+                        
+                        ./mvnw clean package -DskipTests
+                        
+                        ls -ltr target
+                        
+                        """
+                    }
+                }
+            }
+        }
+
+        stage('Build Image') {
+            steps {
+                echo """Build Image... ${image_name}:${image_version}"""
+                script{
+                    if(params.build_image_flag){
+                        sh """
+                        id
+                        pwd
+                        mv  ./target/$jar_name ./docker/
+
+                        cd ./docker/
+                        ls -ltr
+
+                        docker build -t ${image_name}:${image_version} -f custom-dockerfile .
+                        docker image ls ${image_name}
+                        """
+                    }
+                }
+            }
+        }
+        
+        stage('Push Image Into AWS ECR') {
+                    
+            steps {
+                script{
+                    echo """Push Image Into AWS ECR... ${image_name}:${image_version}"""
+                    sh 'aws --version'
+                    withCredentials([[
+                        $class: 'AmazonWebServicesCredentialsBinding',
+                        credentialsId: 'finkub-ecr',
+                        accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                        secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                        // some block
+                        if(params.push_flag_uat){
+                            sh """
+                            docker image ls ${image_name}
+                            docker tag ${image_name}:${image_version} 385680603681.dkr.ecr.ap-southeast-1.amazonaws.com/customer:${image_version}    
+                            aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 385680603681.dkr.ecr.ap-southeast-1.amazonaws.com
+                            docker push 385680603681.dkr.ecr.ap-southeast-1.amazonaws.com/customer:${image_version}     
+                            """  
+                        }
+                       if(params.push_flag_prd){
+                            sh """
+                            docker image ls ${image_name}
+                            docker tag ${image_name}:${image_version} 385680603681.dkr.ecr.ap-southeast-1.amazonaws.com/customer:${image_version}    
+                            aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 385680603681.dkr.ecr.ap-southeast-1.amazonaws.com
+                            docker push 385680603681.dkr.ecr.ap-southeast-1.amazonaws.com/customer:${image_version}     
+                            """  
+                       }
+                    }
+                }
+            }
+        }
+        
+        
+    }
+
+    post {
+        always {
+            echo "You can always see this"
+            sh """
+                docker image ls ${image_name}
+                docker rmi ${image_name}:${image_version}
+                docker image ls ${image_name}
+            """
+        }
+        success {
+            echo "The job ran successfully"
+        }
+        unstable {
+            echo "Gear up! The build is unstable. Try fix it"
+        }
+        failure {
+            echo "OMG! The build failed"
+        }
+    }
+
+}

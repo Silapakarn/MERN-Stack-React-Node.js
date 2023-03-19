@@ -1,25 +1,25 @@
 import logo from './logo.svg';
 import './App.css';
+import { IconContext, Horse, Heart, Cube } from "phosphor-react";
+import * as Icon from "phosphor-react";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>Test Deploy Uat v.1.0</h1>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <IconContext.Provider
+      value={{
+        color: "limegreen",
+        size: 32,
+        weight: "bold",
+        mirrored: false,
+      }}
+    >
+      <div>
+        <Horse /> {/* I'm lime-green, 32px, and bold! */}
+        <Horse /> {/* I'm lime-green, 32px, and bold! */}
+        <Heart /> {/* Me too! */}
+        <Cube />  {/* Me three :) */}
+      </div>
+    </IconContext.Provider>
   );
 }
 

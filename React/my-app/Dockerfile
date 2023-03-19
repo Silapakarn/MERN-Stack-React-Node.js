@@ -11,7 +11,7 @@
 # CMD [ "npm", "start" ]
 
 FROM nginx:stable-alpine
-COPY build /etc/nginx/html
+COPY build/ /etc/nginx/html/
 # new
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
