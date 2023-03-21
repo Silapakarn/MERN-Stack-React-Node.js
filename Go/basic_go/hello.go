@@ -4,16 +4,19 @@ import (
 	"fmt"
 )
 
-func main()  {
-	
-	ratings := 9.0
 
-	switch {
-	case ratings < 5.0:
-		fmt.Println("Disappointed")
-	case ratings == 5.0 && ratings < 7.0:
-		fmt.Println("Normal")
-	case ratings >= 7.0 && ratings < 10.0:
-		fmt.Println("Good")
+func main()  {
+
+	skills := [3]string{"js","go","Python"}
+
+	for i := 0; i < len(skills); i++ {
+		fmt.Println(skills[i])
 	}
+
+	sum := 1
+	for i := 0; i < 5; i++ {
+		sum += sum
+		fmt.Println("i: ", i, "sum: ", sum)
+	}
+
 }
