@@ -83,6 +83,8 @@ func getMoviesByIdHandler(c echo.Context) error {
 	FROM goimdb WHERE imdbID=?`, imdbID)
 	m := Movie{}
 	err := row.Scan(&m.ID, &m.ImdbID, &m.Title, &m.Year, &m.Rating, &m.IsSuperHero)
+
+
 	switch err {
 	case nil:
 		return c.JSON(http.StatusOK, m)
@@ -101,8 +103,8 @@ func createMoviesHandler(c echo.Context) error {
 	}
 
 	stmt, err := db.Prepare(`
-	INSERT INTO goimdb(imdbID,title,year,rating,isSuperHero)
-	VALUES (?,?,?,?,?);
+		INSERT INTO goimdb(imdbID,title,year,rating,isSuperHero)
+		VALUES (?,?,?,?,?);
 	`)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err.Error())
@@ -111,6 +113,7 @@ func createMoviesHandler(c echo.Context) error {
 
 	b := fmt.Sprintf("%v", m.IsSuperHero)
 	r, err := stmt.Exec(m.ImdbID, m.Title, m.Year, m.Rating, b)
+
 	switch {
 	case err == nil:
 		id, _ := r.LastInsertId()
@@ -122,6 +125,26 @@ func createMoviesHandler(c echo.Context) error {
 		return c.JSON(http.StatusInternalServerError, err.Error())
 	}
 }
+
+func updateMoviesHandler(u echo.Context) error{
+
+	imdbID := u.Param("imdbID")
+	row := db.QueryRow(`SELECT id, imdbID, title, year, rating, isSuperHero 
+	FROM goimdb WHERE imdbID=?`, imdbID)
+	m := Movie{}
+	err := row.Scan(&m.ID, &m.ImdbID, &m.Title, &m.Year, &m.Rating, &m.IsSuperHero)
+
+
+	switch err {
+	case nil:
+		return u.JSON(http.StatusOK, m)
+	case sql.ErrNoRows:
+		return u.JSON(http.StatusNotFound, map[string]string{"message!": "not found"})
+	default:
+		return u.JSON(http.StatusInternalServerError, err.Error())
+	}
+}
+
 
 var db *sql.DB
 
@@ -141,14 +164,14 @@ func main() {
 	conn()
 
 	createTb := `
-	CREATE TABLE IF NOT EXISTS goimdb (
-	id INT AUTO_INCREMENT,
-	imdbID TEXT NOT NULL UNIQUE,
-	title TEXT NOT NULL,
-	year INT NOT NULL,
-	rating FLOAT NOT NULL,
-	isSuperHero BOOLEAN NOT NULL,
-	PRIMARY KEY (id)
+		CREATE TABLE IF NOT EXISTS goimdb (
+		id INT AUTO_INCREMENT,
+		imdbID TEXT NOT NULL UNIQUE,
+		title TEXT NOT NULL,
+		year INT NOT NULL,
+		rating FLOAT NOT NULL,
+		isSuperHero BOOLEAN NOT NULL,
+		PRIMARY KEY (id)
 	);
 	`
 	if _, err := db.Exec(createTb); err != nil {
@@ -158,12 +181,14 @@ func main() {
 	e := echo.New()
 	e.Use(middleware.Logger())
 
+
 	e.GET("/movies", getAllMoviesHandler)
 	e.GET("/movies/:imdbID", getMoviesByIdHandler)
-
 	e.POST("/movies", createMoviesHandler)
+	e.PUT("/movies/:imdbID", updateMoviesHandler)
+	
 
-	port := "2565"
+	port := "2566"
 	log.Println("starting... port:", port)
 
 	log.Fatal(e.Start(":" + port))

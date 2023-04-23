@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./App.css";
+import "./style.css";
 
 function App() {
   //State
@@ -83,79 +83,71 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <h3 style={{ marginTop: "50px" }}>
-        Program Check Discount Rate for User
-      </h3>
+    <div className="bg">
+      <div className="cashier_order">
 
-      <input onChange={(e) => setInput(e.target.value)} placeholder="name" />
-      {/* <button onClick={changeUser}>Change username</button> */}
-      <button onClick={cheeckMemberInArray}>Check Member</button>
 
-      <div style={{ marginTop: "20px" }}>
-        {/* <span style={{textAlign: 'center', color: 'red'}}>Username is: {user.name}</span> */}
-        <span style={{ textAlign: "center", color: "red" }}>
-          <h1>{member}</h1>
-        </span>
-        <span style={{ textAlign: "center", color: "red" }}>
-          <h2>{displayDiscountRate}</h2>
-        </span>
+      <div className="qty">
+          <div className="button_1">
+            <button class="button-one" role="button" onClick={() => setOrder1(order1 + 1)}>
+              <i class="fas fa-plus" data-char="+"></i>
+            </button>
+            <a style={{ color: "#A8A8A8" }} className="tag_a_button_1">{order1}</a>
+          </div>
+          <div className="button_2">
+            <button
+              class="button-five"
+              role="button"
+              onClick={() => setOrder2(order2 + 1)}
+            >
+              <i class="fas fa-plus"></i>
+            </button>
+            <a style={{ color: "#A8A8A8" }} className="tag_a_button_2">{order2}</a>
+          </div>
+          <div className="button_3">
+          <button
+              class="button-five"
+              role="button" 
+              onClick={() => setOrder3(order3 + 1)}
+            >
+             <i class="fas fa-plus"></i>
+            </button>
+            <a style={{ color: "#A8A8A8" }} className="tag_a_button_3">{order3}</a>
+          </div>
       </div>
+        
+        <div>
+          <button class="button-38" onClick={calcSum}>
+            Submit for Calculate
+          </button>
+        </div>
 
-      <div>
-        <button
-          class="button-19"
-          role="button"
-          onClick={() => setOrder1(order1 + 1)}
-        >
-          Order A : ( 50$ USD Per Item )
-        </button>
-        <button
-          class="button-19"
-          role="button"
-          onClick={() => setOrder2(order2 + 1)}
-        >
-          Order B : ( 30$ USD Per Item )
-        </button>
-        <button
-          class="button-19"
-          role="button"
-          onClick={() => setOrder3(order3 + 1)}
-        >
-          Order C : ( 75$ USD Per Item )
-        </button>
+        <input onChange={(e) => setInput(e.target.value)} placeholder="name" />
+        <button onClick={cheeckMemberInArray}>Check Member</button>
+
+        <div>
+          <span style={{ textAlign: "center", color: "red" }}>
+            <h1>{member}</h1>
+          </span>
+          <span style={{ textAlign: "center", color: "red" }}>
+            <h2>{displayDiscountRate}</h2>
+          </span>
+        </div>
+
+        <h2>
+          Before discount :{" "}
+          <a style={{ color: "red" }}>{beforeDiscount}$ USD</a>
+        </h2>
+        <h1 class="">
+          Total price : <a style={{ color: "red" }}>{afterDiscount}$ USD</a>
+        </h1>
+
+        <div>
+          <button class="button-38" onClick={clearOrder}>
+            Clear
+          </button>
+        </div>
       </div>
-
-      <h3>
-        Number of order items A is : <a style={{ color: "red" }}>{order1}</a>
-      </h3>
-      <h3>
-        Number of order items B is : <a style={{ color: "red" }}>{order2}</a>
-      </h3>
-      <h3>
-        Number of order items C is : <a style={{ color: "red" }}>{order3}</a>
-      </h3>
-
-      <div>
-        <button class="button-38" onClick={calcSum}>
-          Submit for Calculate
-        </button>
-      </div>
-
-      <h2>
-        Before discount : <a style={{ color: "red" }}>{beforeDiscount}$ USD</a>
-      </h2>
-      <h1 class='totalPrice'>
-        Total price : <a style={{ color: "red" }}>{afterDiscount}$ USD</a>
-      </h1>
-
-      <div>
-        <button class="button-38" onClick={clearOrder}>
-          Clear
-        </button>
-      </div>
-
-      
     </div>
   );
 }

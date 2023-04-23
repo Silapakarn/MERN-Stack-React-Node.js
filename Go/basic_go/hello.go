@@ -1,22 +1,28 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 )
 
+type Course struct {
+	Name       string `json:"name"`
+	Level      string `json:"level"`
+	Views      int    `json:"views"`
+	Instructor string `json:"instructor"`
+	FullPrice  int    `json:"full_price"`
+}
 
-func main()  {
-
-	skills := [3]string{"js","go","Python"}
-
-	for i := 0; i < len(skills); i++ {
-		fmt.Println(skills[i])
-	}
-
-	sum := 1
-	for i := 0; i < 5; i++ {
-		sum += sum
-		fmt.Println("i: ", i, "sum: ", sum)
-	}
-
+func main() {
+	data := []byte(`{
+      		"name": "basic go",
+      		"level": "normal",
+      		"views": 7239,
+      		"instructor": "อนุชิโตะ",
+      		"full_price": 9999
+   		}`)
+	var c Course
+	err := json.Unmarshal(data, &c)
+	fmt.Printf("% #v\n", c)
+	fmt.Println(err)
 }
