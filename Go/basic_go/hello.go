@@ -1,19 +1,28 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 )
 
-func main()  {
-	
-	ratings := 9.0
+type Course struct {
+	Name       string `json:"name"`
+	Level      string `json:"level"`
+	Views      int    `json:"views"`
+	Instructor string `json:"instructor"`
+	FullPrice  int    `json:"full_price"`
+}
 
-	switch {
-	case ratings < 5.0:
-		fmt.Println("Disappointed")
-	case ratings == 5.0 && ratings < 7.0:
-		fmt.Println("Normal")
-	case ratings >= 7.0 && ratings < 10.0:
-		fmt.Println("Good")
-	}
+func main() {
+	data := []byte(`{
+      		"name": "basic go",
+      		"level": "normal",
+      		"views": 7239,
+      		"instructor": "อนุชิโตะ",
+      		"full_price": 9999
+   		}`)
+	var c Course
+	err := json.Unmarshal(data, &c)
+	fmt.Printf("% #v\n", c)
+	fmt.Println(err)
 }

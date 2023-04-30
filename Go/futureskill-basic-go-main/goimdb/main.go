@@ -76,7 +76,6 @@ func main() {
 
 	e.GET("/movies", getAllMoviesHandler)
 	e.GET("/movies/:id", getMoviesByIdHandler)
-
 	e.POST("/movies", createMoviesHandler)
 
 	port := "2565"

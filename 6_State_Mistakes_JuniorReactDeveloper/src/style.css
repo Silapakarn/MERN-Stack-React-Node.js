@@ -1,0 +1,111 @@
+.bg {
+    /* background-image: url('../asset/UI\ Customer\ Order.png'); */
+    background: url('../asset/UI\ Customer\ Order.png') no-repeat center center; 
+    /* -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; */
+    height: 1100px;
+    /* background-repeat: no-repeat;
+    background-position: center; */
+    background-color: #DBE7DE;
+    /* padding-bottom: 800px; */
+    /* padding-top: 7px; */
+    border: 2px solid #DBE7DE;
+  }
+  
+  
+  
+  .cashier_order{
+    /* border: 2px solid rgb(34, 0, 255); */
+    margin-top: 350px;
+    padding-left: 450px;
+    /* padding-top: 300px; */
+    /* width: 50%; */
+  }
+  
+  .qty{
+    border: 2px solid red;
+  }
+  
+  .button_1{
+    /* border: 2px solid red; */
+    margin-top: 45px;
+    margin-left: 10px;
+  }
+
+  .button_2{
+    margin-top:8px;
+    margin-left: 10px;
+  }
+
+  .button_3{
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+
+  .tag_a_button_1{
+    /* border: 2px solid rgb(255, 166, 0); */
+    /* margin-top: 300px; */
+    margin-left: 24px;
+    /* font-family: 'Inter'; */
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .tag_a_button_2{
+    /* border: 2px solid rgb(255, 166, 0); */
+    /* margin-top: 300px; */
+    margin-left: 24px;
+    /* font-family: 'Inter'; */
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .tag_a_button_3{
+    /* border: 2px solid rgb(255, 166, 0); */
+    /* margin-top: 300px; */
+    margin-left: 24px;
+    /* font-family: 'Inter'; */
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  button {
+    padding: 0;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    cursor: pointer;
+  }
+  
+  button:focus {
+    outline: 0;
+  }
+
+  button {
+    height: 50px;
+    width: 50px;
+    /* box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+      0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2); */
+  }
+
+  .button-five {
+    background-color: #DBE7DE;
+    border-radius: 25px;
+    /* border: 2px solid red; */
+  } 
+
+  .button-one {
+    background-color: #DBE7DE;
+    border-radius: 25px;
+    /* border: 2px solid red; */
+  } 
+  
